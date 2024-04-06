@@ -32,8 +32,21 @@ public class Tabuleiro {
 		if(temUmaPeca(posicao)) {
 			throw new TabuleiroException("Já existe uma peça na posição " + posicao);
 		}
-		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
-		peca.posicao = posicao;
+		pecas[posicao.getLinha()][posicao.getColuna()] = peca; //coloca a peça na matriz de peças
+		peca.posicao = posicao; //aponta a posição da peça para a posiçao dada
+	}
+	
+	public Peca removerPeca(Posicao posicao) {
+		if(!posicaoExiste(posicao)) {
+			throw new TabuleiroException("Posição não existe no tabuleiro");
+		}
+		if(peca(posicao) == null) { // se não tiver uma peça nessa posição retorna null
+			return null;
+		}
+		Peca aux = peca(posicao);
+		aux.posicao = null; //aponta a posição da peça para null
+		pecas[posicao.getLinha()][posicao.getColuna()] = null; //substitui a peça na matriz de peças por null
+		return aux;
 	}
 	
 	private boolean posicaoExiste(int linha, int coluna) { //retorna se a posição existe no tabuleiro

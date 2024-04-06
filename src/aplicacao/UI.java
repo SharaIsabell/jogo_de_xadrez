@@ -1,7 +1,13 @@
 package aplicacao;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import javax.management.RuntimeErrorException;
+
 import xadrez.Cor;
 import xadrez.PecaXadrez;
+import xadrez.PosicaoXadrez;
 
 public class UI {
 
@@ -31,7 +37,16 @@ public class UI {
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 	
 	
-	
+	public static PosicaoXadrez lerPosicaoXadrez(Scanner leitor) { //pegando uma posição dada pelo jogador / Ex.: a1
+		try {
+			String posicaoDada = leitor.nextLine();
+			char coluna = posicaoDada.charAt(0); //pegando a letra(coluna) da posição / Ex.: a
+			int linha = Integer.parseInt(posicaoDada.substring(1)); //pegando a String posicaoDada a partir da posicao 1(número da string/ Ex.: 1) e transformando em número inteiro
+			return new PosicaoXadrez(coluna, linha);
+		} catch(RuntimeException e) {
+			throw new InputMismatchException("Erro lendo PosicaoXadrez. Valores aceitos são de a1 a h8");
+		}
+	}
 
 	public static void printTabuleiro(PecaXadrez[][] pecas) { // imprimindo tabuleiro
 		for (int i = 0; i < pecas.length; i++) {

@@ -14,11 +14,11 @@ public class PosicaoXadrez {
 		this.linha = linha;
 	}
 	
-	public Posicao converteParaPosicaoXadrez() {
+	public Posicao converteParaPosicao() {
 		return new Posicao(8 - linha, coluna - 'a');
 	}
 	
-	protected static PosicaoXadrez converteParaPosicao(Posicao posicao) {
+	protected static PosicaoXadrez converteParaPosicaoXadrez(Posicao posicao) {
 		return new PosicaoXadrez((char)('a' - posicao.getColuna()), 8 - posicao.getLinha());
 	}
 
